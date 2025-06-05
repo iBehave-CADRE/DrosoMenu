@@ -9,7 +9,7 @@ def move(ser, pos):
     print(f"Moving to Position {responses[pos]}")
 
     # Send position to the device
-    ser.write(f'{pos}'.encode('UTF-8'))
+    ser.write(str(pos).encode('UTF-8'))
 
     # Get and decode response of device
     response = ser.readline().decode().strip()
