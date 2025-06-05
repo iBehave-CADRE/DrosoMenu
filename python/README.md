@@ -27,3 +27,13 @@ Type a number 0-3 to make the device go to the corresponding position. If you wa
 
 To run the example movement script use the command ```python move.py``` from the same folder where the file is located.
 The device should move between the positions with a delay of $10\mathrm{s}$.
+
+# Custom Code
+
+A minimal example to tell the device to move to a specific position is given in ```minimal.py```.
+It expects a number in the range of $0-3$ encoded as UTF-8. The serial port is opened in a context manager (```with```-statement) and the position send via the ```write``` function.
+
+The minimal exmaple does not check for a response from the device but just blindly commands a position.
+
+
+If you want to move to multiple positions it is best to do this within the ```with``` block instead of opening a new connection to the serial port each time.
