@@ -12,9 +12,14 @@
 
 # Usage
 
+> [!NOTE]
+> Make sure to edit the COM port in the file to the COM port your device is connected to.
+> If you are unsure refer to this [section](#finding-the-com-port).
+
 ## Interactive
 
 To run the example script use the command ```python interactive.py``` from the same folder where the file is located.
+
 You can now interact with the device.
 
 Type a number 0-3 to make the device go to the corresponding position. If you want to exit, type ```exit```.
@@ -37,3 +42,9 @@ The minimal exmaple does not check for a response from the device but just blind
 
 
 If you want to move to multiple positions it is best to do this within the ```with``` block instead of opening a new connection to the serial port each time.
+
+# Finding the COM port
+
+To find the COM port your device is connected to you can use the ```list_ports.py``` script. It will show you all connected COM ports.
+
+If you are unsure which port corresponds to your device run the script without the device plugged in and again with the device plugged in and see which COM port got added.
