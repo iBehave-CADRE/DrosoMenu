@@ -8,19 +8,19 @@ Using the function `serialport(port, Baudrate)` allows to create an object/varia
 > The COM port can be checked in the Arduino IDE under Tools -> Port.
 
 
-```MATLAB
+```matlab
 DrosoMenu = serialport("COM5", 9600);
 ```
 
 To correctly interpret the serial communincation content, a terminator must be defined. In the Arduino code of the DrosoMenu controller, a carriage return (CR) is used as terminator. Thus, the terminator of the serialport object must be set to "CR" with `configureTerminator(device, terminator)`:
 
-```MATLAB
+```matlab
 configureTerminator(DrosoMenu,"CR");
 ```
 
 The function `writeline(device, data)` can be used to send commands to the DrosoMenu controller. The commands '0', '1', '2' and '3' will move the DrosoMenu to the corresponding position:
 
-```MATLAB
+```matlab
 writeline(DrosoMenu, '0');
 ```
 
@@ -29,18 +29,18 @@ writeline(DrosoMenu, '0');
 > [!TIP]
 > The specific response to an incoming command is determined in the Arduino firmware and can also be adapted.
 
-```MATLAB
+```matlab
 readout=readline(DrosoMenu);
 ```
 
 The function `flush(device)` can be used to clear the input and output buffer of the serialport object. This prevents stack overflow when interacting with the device and ensures reading out the most recent data.
 
-```MATLAB
+```matlab
 flush(DrosoMenu);
 ```
 
 %% The DrosoMenu can be disconnected with the function `delete(var)`. This deletes the object and device created via serial port:
 
-```MATLAB
+```matlab
 delete(DrosoMenu);
 ```
