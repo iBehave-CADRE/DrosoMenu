@@ -1,6 +1,6 @@
 # DrosoMenu Arduino Firmware
 
-This firmware controls the DrosoMenu apparatus for neuroscience experiments, such as automated delivery of gustatory stimuli or precise positioning of experimental subjects. The code manages two actuators (X and Z axes) and provides a synchronization signal for external data acquisition systems.
+This firmware controls the DrosoMenu apparatus for neuroscience experiments, such as automated delivery of gustatory stimuli or precise positioning of experimental subjects. The code manages two actuators (X and Z axes) and provides a synchronization signal for external data acquisition systems. It has to be flashed on the Arduino in the DrosoMenu control box, to run in a continuous loop.
 
 ## Hardware Overview
 
@@ -45,7 +45,7 @@ The Arduino continuously listens for serial commands:
 - **Command `'2'`:** Moves X axis to Position 2, inserts Z axis, updates sync signal.
 - **Command `'3'`:** Moves X axis to Position 3, inserts Z axis, updates sync signal.
 
-Each movement is separated by a configurable delay (`MovementTimeout`, default 2000 ms) to ensure precise timing.
+Each movement is separated by a configurable delay (`MovementTimeout`, default 2000 ms) to ensure precise timing. After receiving a command for movement, the arduino prints an ansewer via serial communication. This answer can be read out with Python, MATLAB or Bonsai.
 
 ### Synchronization
 
@@ -72,6 +72,59 @@ The sync signal (PWM on pin 10) changes with each position, allowing external DA
 - **No Movement:** Check pin assignments and wiring.
 - **Incorrect Positioning:** Recalibrate PWM values for each position.
 - **Serial Communication Issues:** Ensure baud rate matches between Arduino and host computer.
+
+## Key Functions Used in DrosoMenu.ino
+
+The Arduino firmware uses several built-in functions to control hardware and handle communication:
+
+### `Serial.begin(baudrate)`
+Initializes serial communication between the Arduino and the host computer.  
+**Usage in DrosoMenu:**  
+`Serial.begin(115200);` sets the communication speed to 115200 bits per second, allowing fast and reliable data transfer for real-time experimental control.
+
+### `pinMode(pin, mode)`
+Configures a specified pin to behave as either an input or output.  
+**Usage in DrosoMenu:**  
+Used to set actuator and synchronization pins as outputs so they can control hardware devices.
+
+### `digitalWrite(pin, value)`
+Sets a digital pin to HIGH (5V) or LOW (0V).  
+**Usage in DrosoMenu:**  
+Controls the Z axis actuator (binary movement: all in or all out).
+
+### `analogWrite(pin, value)`
+Outputs a PWM (pulse-width modulation) signal on a pin, simulating analog output.  
+**Usage in DrosoMenu:**  
+Controls the X axis actuator and the synchronization signal. The value (0–255) determines the actuator position or sync signal level.
+
+### `Serial.available()`
+Returns the number of bytes available to read from the serial buffer.  
+**Usage in DrosoMenu:**  
+Checks if a command has been sent from the host computer.
+
+### `Serial.read()`
+Reads incoming serial data (one byte at a time).  
+**Usage in DrosoMenu:**  
+Retrieves the command character sent by the host computer.
+
+### `Serial.println(message)`
+Sends a message back to the host computer, useful for status updates and debugging.  
+**Usage in DrosoMenu:**  
+Prints which position the DrosoMenu is moving to, aiding experiment monitoring.
+
+### `delay(milliseconds)`
+Pauses the program for a specified time (in milliseconds).  
+**Usage in DrosoMenu:**  
+Ensures actuators have time to reach their positions before the next movement or command.
+
+### `Serial.flush()`
+Clears the serial buffer, ensuring only the latest data is processed.  
+**Usage in DrosoMenu:**  
+Prevents old or unwanted commands from interfering with actuator control.
+
+---
+
+These functions together enable precise, real-time control of the DrosoMenu hardware, allowing for automated and synchronized experimental procedures
 
 ---
 

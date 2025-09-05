@@ -2,7 +2,7 @@
 // such as automated delivery of gustatory stimuli or positioning of experimental subjects.
 // It manages two actuators (X and Z axes) and a synchronization signal for data acquisition systems.
 
-// Variable to store incoming serial commands from a host computer or controller. The host computer can be connected via USB and send the commands in real-time with Python and MATLAB.
+// Variable to store incoming serial commands from a host computer or controller. The host computer can be connected via USB and send the commands in real-time with Python, Bonsai and MATLAB.
 // Commands are expected as single ASCII characters ('0', '1', '2', '3').
 byte incomingByte;
 
