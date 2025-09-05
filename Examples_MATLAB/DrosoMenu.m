@@ -5,7 +5,7 @@
 
 
 
-%% Using the function serialport('COM', Baudrate) allows to create an object/variable that provides access to the DrosoMenu via serial communication.
+%% Using the function serialport('COM', Baudrate) allows to create an object/variable that provides access to the DrosoMenu device via serial communication.
 %% The Baudrate must be set to 9600, as this is the Baudrate defined in the Arduino code of the DrosoMenu controller.
 %% The COM port must be adapted to the one used by the DrosoMenu controller. This can be checked in the Arduino IDE under Tools -> Port.
 DrosoMenu = serialport("COM5", 9600);
