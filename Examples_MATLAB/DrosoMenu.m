@@ -6,6 +6,7 @@ configureTerminator(DrosoMenu,"CR");
 writeline(DrosoMenu, '0');
 readout=readline(DrosoMenu);
 flush(DrosoMenu);
+
 %% Move to position 1
 writeline(DrosoMenu, '1');
 readout=readline(DrosoMenu);
